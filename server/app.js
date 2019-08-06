@@ -1,6 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
-const router = new express.Router();
+
 
 
 const app = express();
@@ -39,6 +39,7 @@ app.get("/", (req, res) => {
 app.get("/api/TodoItems", (req, res) => {
     res.status(200)
     res.json(data);
+    console.log(data)
 });
 
 // READ SINGLE TODO ITEM FROM LIST
@@ -50,6 +51,8 @@ app.get("/api/TodoItems/:number", (req, res) => {
 // CREATE SINGLE TODO ITEM
 // app.post() responsible for creating item
 app.post("/api/TodoItems/", (req, res) => {
+    console.log("req.body", req.body)
+    console.log("todoItemId", todoItemId)
     let postedID = req.body.todoItemId;
     let foundItem = false;
 
