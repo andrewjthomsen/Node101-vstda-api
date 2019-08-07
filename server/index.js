@@ -1,3 +1,4 @@
+// SIMPLE SERVER FILE (STARTING POINT OF APPLICATION)
 const server = require('./app');
 
 // write your code here
