@@ -66,10 +66,14 @@ app.post("/api/TodoItems/", (req, res) => {
   }
 //   REVIEW HOW SECOND IF STATEMENT IS WRITTEN.
 // ERROR READS EXPECTING A 201 RES, BUT INSTEAD IS GETTING A 500 ERROR
+// ERROR FROM ABOVE -> todoItemId is not defined, retturns undefined.
+// SCOPE ISSUE OR ISSUE WITH HOW IS WRITTEN
+// 6:17am having issue pushing committed changes to github. Possibly due to internet connection problems
   if (foundItem === false) {
     data.push(req.body);
     console.log("req.body", req.body);
   }
+//   REVIEW SCOPE OF RES.JSON RESPONSE -> POssibly a scope issue
   res.status(201).json(req.body);
 });
 
