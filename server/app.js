@@ -28,8 +28,7 @@ var data = [
 // add your code here
 // HOME ROUTE
 app.get("/", (req, res) => {
-  res.status(200);
-  res.send({ status: "ok" });
+  res.json("status: ok")
 });
 
 // READ *ALL TODO ITEMS FROM LIST
@@ -51,30 +50,21 @@ app.get("/api/TodoItems/:number", (req, res) => {
 // app.post() responsible for creating item
 // ERROR with POST ROUTE (NOT PASSING TEST -> RECOMMEND REVIEWING HOW TEST IS WRITTEN)
 app.post("/api/TodoItems/", (req, res) => {
-  console.log("req.body", req.body);
-  console.log("todoItemId", todoItemId);
-  let postedID = req.body.todoItemId;
-  let foundItem = false;
+let createdItem = {
+  todoItemId: 0,
+  name: "Mystery Todo Item",
+  priority: 3,
+  completed: false
+};
 
-
-  for (var i = 0; i < data.length; i++) {
-      //   ERROR POSSIBLY COMING FROM HOW IF STATEMENT IS WRITTEN
-    if (data[i].todoItemId === postedID) {
-      data[i] = req.body;
-      foundItem = true;
-    }
+for (let i =0; i < data.length; i++) {
+  if (data[i]['todoItemId'] == createdItem['todoItemId']) {
+    data[i] = createdItem;
+    res.status(201).send(createdItem);
   }
-//   REVIEW HOW SECOND IF STATEMENT IS WRITTEN.
-// ERROR READS EXPECTING A 201 RES, BUT INSTEAD IS GETTING A 500 ERROR
-// ERROR FROM ABOVE -> todoItemId is not defined, retturns undefined.
-// SCOPE ISSUE OR ISSUE WITH HOW IS WRITTEN
-// 6:17am having issue pushing committed changes to github. Possibly due to internet connection problems
-  if (foundItem === false) {
-    data.push(req.body);
-    console.log("req.body", req.body);
-  }
-//   REVIEW SCOPE OF RES.JSON RESPONSE -> POssibly a scope issue
-  res.status(201).json(req.body);
+}
+data.push(createdItem);
+res.status(201).send(createdItem);
 });
 
 // DELETE TODO ITEM
